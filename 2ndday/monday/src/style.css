@@ -1,0 +1,17 @@
+body{
+    background-color: aqua;
+}
+.main{
+
+    display: flex;
+    justify-content: center;
+    
+
+}
+
+.v1{
+
+    display: flex;
+    justify-content: center;
+}
+
