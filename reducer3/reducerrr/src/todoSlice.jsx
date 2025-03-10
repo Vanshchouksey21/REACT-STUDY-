@@ -3,15 +3,49 @@ import { createSlice } from '@reduxjs/toolkit';
 const todoSlice = createSlice({
   name: "mytodo",
   initialState: {
-    task: [], // Initial empty task array
+    task: [], 
   },
   reducers: {
     addTask: (state, action) => { 
-      console.log(action.payload); // For debugging purposes
-      state.task.push(action.payload); // Adding the new task to the state
+      console.log(action.payload); 
+      state.task.push(action.payload); 
     },
+    deletetask:(state,actions)=>{
+      state.task=state.task.filter((key)=>{
+          if(key.id!=actions.payload.id)
+          {
+              return true
+          }
+          else{
+              return false
+          }
+      })
+        },
+taskcomplete:(state , actions)=>{
+  for(let i = 0 ; i<state.task.length ;++i){
+    if(state.task[i].id == actions.payload.id){
+      state.task[i].status="Completed";
+    }
+  }
+},
+taskIncomplete:(state , actions)=>{
+  for(let i = 0 ; i<state.task.length ;++i){
+    if(state.task[i].id == actions.payload.id){
+      state.task[i].status="Incomplete";
+    }
+  }
+},
+editdatasave:(state , actions)=>{
+  for(let i = 0 ; i<state.task.length ;++i){
+    if(state.task[i].id == actions.payload.id){
+      state.task[i].work=actions.payload.work;
+
+    }
+  }
+}
+
   },
 });
 
-export const { addTask } = todoSlice.actions; // Export the action creator
-export default todoSlice.reducer; // Export the reducer to be used in the store
+export const { addTask , deletetask , taskIncomplete , taskcomplete , editdatasave} = todoSlice.actions; 
+export default todoSlice.reducer; 
